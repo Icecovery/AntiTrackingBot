@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34714.143
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AntiTrackingBot.Telegram", "AntiTrackingBot.Telegram\AntiTrackingBot.Telegram.csproj", "{A5E889F8-0603-4C76-BDB6-19C54F1312ED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AntiTrackingBot.Core", "AntiTrackingBot.Core\AntiTrackingBot.Core.csproj", "{7B79E453-B585-40E2-98A1-AFBF4FF56028}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntiTrackingBot.Logging", "AntiTrackingBot.Logging\AntiTrackingBot.Logging.csproj", "{487E34BD-2D66-43D4-BAFC-5B64C933AFFC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8377EB47-88FC-4B15-85BC-B6D99381E467}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntiTrackingBot.Test", "AntiTrackingBot.Test\AntiTrackingBot.Test.csproj", "{14E3B4DA-07C4-4058-A328-6E3B8E2D5E66}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A5E889F8-0603-4C76-BDB6-19C54F1312ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5E889F8-0603-4C76-BDB6-19C54F1312ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5E889F8-0603-4C76-BDB6-19C54F1312ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5E889F8-0603-4C76-BDB6-19C54F1312ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B79E453-B585-40E2-98A1-AFBF4FF56028}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B79E453-B585-40E2-98A1-AFBF4FF56028}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B79E453-B585-40E2-98A1-AFBF4FF56028}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B79E453-B585-40E2-98A1-AFBF4FF56028}.Release|Any CPU.Build.0 = Release|Any CPU
+		{487E34BD-2D66-43D4-BAFC-5B64C933AFFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{487E34BD-2D66-43D4-BAFC-5B64C933AFFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{487E34BD-2D66-43D4-BAFC-5B64C933AFFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{487E34BD-2D66-43D4-BAFC-5B64C933AFFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14E3B4DA-07C4-4058-A328-6E3B8E2D5E66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14E3B4DA-07C4-4058-A328-6E3B8E2D5E66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14E3B4DA-07C4-4058-A328-6E3B8E2D5E66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14E3B4DA-07C4-4058-A328-6E3B8E2D5E66}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BCAB1681-FDC6-418A-89D3-9FB748D28958}
+	EndGlobalSection
+EndGlobal
