@@ -2,11 +2,11 @@
 using Xunit.Abstractions;
 
 namespace AntiTrackingBot.Test.Logging;
-internal class TestLoggerProvider(ITestOutputHelper outputHelper) : ILoggerProvider
+internal class TestLoggerProvider(IMessageSink diagnosticMessageSink) : ILoggerProvider
 {
 	public ILogger CreateLogger(string categoryName)
 	{
-		return new TestOutputLogger(outputHelper);
+		return new TestOutputLogger(diagnosticMessageSink);
 	}
 
 	public void Dispose() { }

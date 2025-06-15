@@ -17,24 +17,25 @@ namespace AntiTrackingBot.Test.Models;
 /// </summary>
 public class CoreFixture : IDisposable
 {
-	private AntiTrackingCore? _core;
+	public AntiTrackingCore Core { get; }
 	private readonly string _tempPath =
 		Path.Combine("tmp", Path.GetFileNameWithoutExtension(Path.GetRandomFileName()));
 
-	public AntiTrackingCore Create(ITestOutputHelper outputHelper, bool updateImmediately)
+	/// <summary>
+	/// Initializes a new instance of the <see cref="CoreFixture"/> class
+	/// </summary>
+	/// <param name="diagnosticMessageSink"> The diagnostic message sink for logging </param>
+	/// <param name="updateFilter"> Indicates whether to update the filters before running the tests </param>
+	public CoreFixture(IMessageSink diagnosticMessageSink, bool updateFilter)
 	{
-		if (_core != null)
-			return _core;
-
-		ILogger<AntiTrackingCore> logger = CreateLogger<AntiTrackingCore>(outputHelper);
+		ILogger<AntiTrackingCore> logger = CreateLogger<AntiTrackingCore>(diagnosticMessageSink);
 		IConfiguration config = CreateCoreConfig();
 
-		_core = new AntiTrackingCore(logger, config);
-
-		if (updateImmediately)
-			_core.UpdateFiltersAsync().Wait();
-
-		return _core;
+		Core = new AntiTrackingCore(logger, config);
+		if (updateFilter)
+		{
+			Core.UpdateFiltersAsync().Wait();
+		}
 	}
 
 	public void Dispose()
@@ -45,12 +46,12 @@ public class CoreFixture : IDisposable
 		GC.SuppressFinalize(this);
 	}
 
-	private static ILogger<T> CreateLogger<T>(ITestOutputHelper outputHelper)
+	private static ILogger<T> CreateLogger<T>(IMessageSink diagnosticMessageSink)
 	{
 		ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
 		{
 			builder.SetMinimumLevel(LogLevel.Debug);
-			builder.AddProvider(new TestLoggerProvider(outputHelper));
+			builder.AddProvider(new TestLoggerProvider(diagnosticMessageSink));
 		});
 		ILogger<T> logger = loggerFactory.CreateLogger<T>();
 
@@ -85,3 +86,15 @@ public class CoreFixture : IDisposable
 		return config;
 	}
 }
+
+/// <summary>
+/// This fixture is used to create a new instance of <see cref="AntiTrackingCore"/> for each test group,
+/// and it updates the filters before running the tests.
+/// </summary>
+public class CoreFunctionalFixture(IMessageSink diagnosticMessageSink) : CoreFixture(diagnosticMessageSink, true);
+
+/// <summary>
+/// This fixture is used to create a new instance of <see cref="AntiTrackingCore"/> for each test group,
+/// and it does not update the filters before running the tests.
+/// </summary>
+public class CoreUpdateFixture(IMessageSink diagnosticMessageSink) : CoreFixture(diagnosticMessageSink, false);

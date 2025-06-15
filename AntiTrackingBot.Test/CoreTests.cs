@@ -1,6 +1,5 @@
 using AntiTrackingBot.Core;
 using AntiTrackingBot.Test.Models;
-using Xunit.Abstractions;
 
 namespace AntiTrackingBot.Test;
 
@@ -9,10 +8,8 @@ namespace AntiTrackingBot.Test;
 /// <see cref="CoreUpdateTest"/> for the test that checks the
 /// <see cref="AntiTrackingCore.UpdateFiltersAsync"/> method
 /// </summary>
-public class CoreTests(CoreFixture fixture, ITestOutputHelper outputHelper) : IClassFixture<CoreFixture>
+public class CoreTests(CoreFunctionalFixture fixture) : IClassFixture<CoreFunctionalFixture>
 {
-	private readonly AntiTrackingCore _core = fixture.Create(outputHelper, true);
-
 	#region Helpers
 	private static void ShouldBeTrue(bool result)
 	{
@@ -52,7 +49,7 @@ public class CoreTests(CoreFixture fixture, ITestOutputHelper outputHelper) : IC
 				"Hey check out this cool video I found: https://youtu.be/dQw4w9WgXcQ?t=42, you will like it! Also, check out this tweet: https://twitter.com/example/status/1234567890")]
 	public void TestTracking(string input, string expected)
 	{
-		ShouldBeTrue(_core.RemoveTracking(ref input));
+		ShouldBeTrue(fixture.Core.RemoveTracking(ref input));
 
 		Assert.Equal(expected, input);
 	}
@@ -70,7 +67,7 @@ public class CoreTests(CoreFixture fixture, ITestOutputHelper outputHelper) : IC
 	{
 		string original = input;
 
-		ShouldBeFalse(_core.RemoveTracking(ref input));
+		ShouldBeFalse(fixture.Core.RemoveTracking(ref input));
 
 		Assert.Equal(original, input);
 	}

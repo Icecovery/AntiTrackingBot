@@ -21,6 +21,10 @@ internal class BotService : BackgroundService
 	private readonly TelegramBotClient _bot;
 
 	private readonly InlineKeyboardMarkup _projectLinkMarkup;
+	private readonly LinkPreviewOptions _linkPreviewOptions = new()
+	{
+		IsDisabled = true
+	};
 
 	public BotService(ILogger<BotService> logger, IConfiguration config, IAntiTrackingCore core)
 	{
@@ -72,12 +76,15 @@ internal class BotService : BackgroundService
 				_logger.LogInformation("Removed tracking from message");
 #endif
 
-				await botClient.SendTextMessageAsync(
+				await botClient.SendMessage(
 					chatId: message.Chat.Id,
 					text: text,
-					disableWebPagePreview: true,
+					linkPreviewOptions: _linkPreviewOptions,
 					replyMarkup: _projectLinkMarkup,
-					replyToMessageId: message.MessageId,
+					replyParameters: new ReplyParameters
+					{
+						MessageId = message.MessageId
+					},
 					cancellationToken: ct);
 			}
 		}

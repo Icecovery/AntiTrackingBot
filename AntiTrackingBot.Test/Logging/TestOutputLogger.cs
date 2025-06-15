@@ -1,10 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
 using Xunit.Abstractions;
+using Xunit.Sdk;
 
 namespace AntiTrackingBot.Test.Logging;
 
-internal class TestOutputLogger(ITestOutputHelper outputHelper) : ILogger
+internal class TestOutputLogger(IMessageSink diagnosticMessageSink) : ILogger
 {
 	public IDisposable? BeginScope<TState>(TState state) where TState : notnull => null;
 
@@ -17,6 +18,6 @@ internal class TestOutputLogger(ITestOutputHelper outputHelper) : ILogger
 		Func<TState, Exception?, string> formatter)
 	{
 		// Write log message to the output helper
-		outputHelper.WriteLine(formatter(state, exception));
+		diagnosticMessageSink.OnMessage(new DiagnosticMessage(formatter(state, exception)));
 	}
 }
