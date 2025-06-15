@@ -55,7 +55,7 @@ public class AntiTrackingCore : IAntiTrackingCore
 			_filterCache.Values.Sum(rules => rules.Count),
 			files.Length);
 
-		_logger.LogDebug(DumpRules());
+		_logger.LogTrace(DumpRules());
 	}
 
 	#region File Processing

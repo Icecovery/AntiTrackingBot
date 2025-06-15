@@ -2,7 +2,6 @@
 using AntiTrackingBot.Test.Models;
 using System;
 using System.Threading.Tasks;
-using Xunit.Abstractions;
 
 namespace AntiTrackingBot.Test;
 
@@ -10,17 +9,12 @@ namespace AntiTrackingBot.Test;
 /// This group is only used to test the <see cref="AntiTrackingCore.UpdateFiltersAsync"/> method.
 /// See <see cref="CoreTests"/> for the rest of the tests
 /// </summary>
-/// <param name="fixture"></param>
-/// <param name="outputHelper"></param>
-public class CoreUpdateTest(CoreFixture fixture, ITestOutputHelper outputHelper)
-	: IClassFixture<CoreFixture>
+public class CoreUpdateTest(CoreUpdateFixture updateFixture) : IClassFixture<CoreUpdateFixture>
 {
-	private readonly AntiTrackingCore _core = fixture.Create(outputHelper, false);
-
 	[Fact]
 	public async Task RemoveTrackingTest()
 	{
-		Exception? ex = await Record.ExceptionAsync(() => _core.UpdateFiltersAsync());
+		Exception? ex = await Record.ExceptionAsync(() => updateFixture.Core.UpdateFiltersAsync());
 
 		Assert.Null(ex);
 	}
